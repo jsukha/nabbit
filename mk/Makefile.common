@@ -1,0 +1,13 @@
+# Directory structure that is common across platforms.
+
+# The directory where Nabbit's .h files are located.
+NABBIT_DIR=../include
+
+# Directory for 
+ARRAYS_DIR=../arrays
+
+# The directory for other common utilities
+UTIL_DIR=../util
+
+# Include directory for Nabbit.
+NABBIT_INCLUDES = -I $(UTIL_DIR) -I $(DAGEVAL_DIR) -I $(ARRAYS_DIR)

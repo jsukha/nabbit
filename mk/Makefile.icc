@@ -1,0 +1,13 @@
+# Makefile for compilation with icc (Linux)
+
+# Include directory for Nabbit.
+NABBIT_INCLUDES = -I $(UTIL_DIR) -I $(NABBIT_DIR) -I $(ARRAYS_DIR)
+
+CC=icc
+CXX=icc
+CILKVIEW_FLAGS=
+LIBARG= 
+
+CFLAGS = -Wall -O3
+CXXFLAGS = $(CFLAGS)
+CILK_SERIALIZE_FLAG = -cilk-serialize
