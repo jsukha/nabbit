@@ -35,6 +35,11 @@
  * This file defines some macros, etc. for dealing with different
  * versions of Cilk and other generally sysdep-dependent functions.
  *
+ *
+ * TBD(jsukha): My implementation is terrible.  
+ * We need to go through and replace many of these functions
+ * with std::atomic now that C++11 is more common.
+ *
  */ 
 #ifndef __NABBIT_SYSDEP_H_
 #define __NABBIT_SYSDEP_H_
@@ -47,6 +52,7 @@
 
 // Intel Cilk Plus definitions.
 #include <cilk/cilk.h>
+#include <cilk/cilk_api.h>
 
 #define NABBIT_WKR_ID __cilkrts_get_worker_number()
 #define NABBIT_WKR_COUNT __cilkrts_get_nworkers()

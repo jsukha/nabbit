@@ -43,6 +43,14 @@
  *
  * The array is optimized for inserts; a "get" must wait until any
  * previous inserts complete before it can continue.
+ *
+ *
+ * TBD(jsukha): This implementation is horrid.  I have only myself to
+ * blame. :)
+ *  
+ * I should really simplify it; in most cases, we really don't care to
+ * change the number of children in the node anyway, so the dynamic
+ * array is overkill for static Nabbit.
  */
 
 #include <assert.h>

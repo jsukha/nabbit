@@ -1,4 +1,4 @@
-Nabbit, Version 1.1
+Nabbit, Version 1.11
 
 ----------------------------------------------------------------------
 This folder contains the implementation of Nabbit, a Cilk library for
@@ -109,4 +109,11 @@ Version History
       architecture/OS-dependent functions.
     - Added common "mk" directory for compiling on different systems.
     - Removed random_dag benchmark.
-    
+
+1.11 Minor tweaks to build with newer Intel compilers.
+
+    - Adding missing #include of cilk_api.h and -lpthread flag.
+    - Flagged some classes that require a major revision
+      or cleaning (e.g., eliminate or simplify dynamic_array for static Nabbit).
+
+      
