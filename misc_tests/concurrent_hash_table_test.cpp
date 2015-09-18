@@ -130,7 +130,8 @@ int main(int argc, char *argv[])
     printf("Deleting hash table: \n");
     delete H;
     printf("Done with delete\n");
-
+    printf("PASSED\n");
+    
     return 0;
 }
 
