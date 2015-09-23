@@ -59,8 +59,10 @@ void all_list_insert(ConcurrentLinkedList* L, int R) {
         void* i_as_ptr = reinterpret_cast<void*>(std::size_t(i));
         // Retry insert until return code is not OP_FAILED.
         while (code == OP_FAILED) {
+            // Cast the int to a larger type.
+            // Yes, we really meant to convert an int into a void*
             return_val = L->insert_if_absent(i,
-                                             i_as_ptr, 
+                                             i_as_ptr,
                                              &code);
             statusCounts[code]++;
         }
