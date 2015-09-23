@@ -89,7 +89,6 @@ class DynamicSerialNode {
   DTGSKeyArray* generated_tasks;
 
   volatile int notify_counter; 
-  volatile int blocking_lock;
 
   inline void mark_as_visited();
 
@@ -98,11 +97,6 @@ class DynamicSerialNode {
   inline void mark_as_computed();
   
   inline void mark_as_completed();
-
-  //  inline bool try_acquire_blocking_lock();
-  //  inline void acquire_blocking_lock();
-  //  inline void release_blocking_lock();
-
 
   void try_init_pred_and_compute(long long pred_key); 
   void init_node_and_compute();
@@ -124,8 +118,8 @@ DynamicSerialNode::DynamicSerialNode(long long k,
      status(NODE_UNVISITED),
      join_counter(1),
      succ_to_notify(new DynamicSerialNodeArray(4)),
-     generated_tasks(NULL),     
-     blocking_lock(0) {
+     generated_tasks(NULL)
+{
 }
 
 // The same as the previous construct, except we pass in a default
@@ -140,8 +134,9 @@ DynamicSerialNode::DynamicSerialNode(long long k,
      status(NODE_UNVISITED),
      join_counter(1),
      succ_to_notify(new DynamicSerialNodeArray(num_succ)),
-     generated_tasks(NULL),
-     blocking_lock(0) {
+     generated_tasks(NULL)
+{
+
 }
 
 
@@ -211,31 +206,6 @@ void DynamicSerialNode::mark_as_computed() {
     }
 }
 
-/* // To switch from computed to completed, we need to be holding the */
-/* // lock on the blocking array. */
-/* bool DynamicSerialNode::try_mark_as_completed() { */
-/*   bool val = false; */
-/*   acquire_blocking_lock(); */
-/*   { */
-/*     if (this->notify_counter == this->succ_to_notify->size_estimate()) { */
-/*       bool valid = nabbit::int_CAS(&this->status, */
-/* 						NODE_COMPUTED, */
-/* 						NODE_COMPLETED); */
-/*       assert(valid); */
-/*       val = true; */
-/*     } */
-/*   } */
-/*   release_blocking_lock(); */
-
-/*   if (PRINT_STATE_CHANGES) { */
-/*     if (val) { */
-/*       printf("--- Key %llu: marked as COMPLETED. join_counter = %d\n", */
-/* 	     this->key, */
-/* 	     this->join_counter); */
-/*     } */
-/*   } */
-/*   return val; */
-/* } */
 
 void DynamicSerialNode::mark_as_completed() {
   assert(this->status == NODE_COMPUTED);
@@ -249,10 +219,7 @@ DAGNodeStatus DynamicSerialNode::get_status() {
 
 void DynamicSerialNode::add_dep(long long key) {
   this->predecessors->add(key);
-
   this->join_counter++;
-  //__sync_add_and_fetch(&this->join_counter,
-  //		       1);  
 }
 
 void DynamicSerialNode::generate_task(long long key) {
@@ -282,15 +249,12 @@ void DynamicSerialNode::try_init_pred_and_compute(long long pred_key) {
   }
 
   if (inserted) {
-    //    actualPredNode->mark_as_visited();
     actualPredNode->init_node_and_compute();
   }
   
   // Continue, whether or not 
   {
     bool pred_finished = true;
-
-    //    actualPredNode->acquire_blocking_lock();
     DAGNodeStatus other_status = actualPredNode->status;
 
     if (other_status < NODE_COMPUTED) {
@@ -302,15 +266,10 @@ void DynamicSerialNode::try_init_pred_and_compute(long long pred_key) {
     printf("inserted = %d. finished? %d\n", inserted, pred_finished);
 #endif
 	   
-    //    actualPredNode->release_blocking_lock();
-
     if (pred_finished) {
-      //      int val = __sync_add_and_fetch(&this->join_counter,
-      //				     -1);
       this->join_counter--;
       int val = this->join_counter;      
       if (val == 0) {
-	//	cilk_spawn this->compute_and_notify();
 	this->compute_and_notify();      
       }
     }
@@ -331,7 +290,6 @@ void DynamicSerialNode::init_node_and_compute() {
   // First try to init + compute predecessors.
   for (i = 0; i < this->predecessors->size_estimate(); ++i) {
     long long pred_key = this->predecessors->get(i);
-    //    cilk_spawn try_init_pred_and_compute(pred_key);
     try_init_pred_and_compute(pred_key);
   }
 
@@ -339,7 +297,6 @@ void DynamicSerialNode::init_node_and_compute() {
     int val;
     this->join_counter--;
     val = this->join_counter;
-    //    val = __sync_add_and_fetch(&this->join_counter, -1);
     
     if (val == 0) {
       compute_and_notify();
@@ -386,7 +343,6 @@ void DynamicSerialNode::compute_and_notify() {
     end_to_notify = this->succ_to_notify->size_estimate();
     
     // Handle the current range of values in the blocking array.
-    //    cilk_for (int i = this->notify_counter; i < end_to_notify; i++) {
     for (int i = this->notify_counter; i < end_to_notify; i++) {
       
       DynamicSerialNode* current_succ = this->succ_to_notify->get(i);
@@ -399,9 +355,6 @@ void DynamicSerialNode::compute_and_notify() {
       current_succ->join_counter--;
       int updated_val = current_succ->join_counter;
 
-      //      int updated_val = __sync_add_and_fetch(&current_succ->join_counter,
-      //					     -1);
-      
       if (updated_val == 0) {
 	assert((current_succ->status == NODE_EXPANDED));
 
@@ -414,7 +367,6 @@ void DynamicSerialNode::compute_and_notify() {
 	       current_succ->key,
 	       current_succ->status);
 #endif
-	//	cilk_spawn current_succ->compute_and_notify();
 	current_succ->compute_and_notify();
       }
     }
@@ -445,10 +397,8 @@ bool DynamicSerialNode::init_root_and_compute(long long root_key) {
   }
 
   if (inserted) {
-    //    actualNode->mark_as_visited();
 
     //    printf("Actually inserted key %llu as a root\n", root_key);
-    //    cilk_spawn actualNode->init_node_and_compute();
 
     actualNode->init_node_and_compute();
   }  
