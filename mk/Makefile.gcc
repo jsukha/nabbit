@@ -3,7 +3,7 @@
 # Include directory for Nabbit.
 NABBIT_INCLUDES = -I $(UTIL_DIR) -I $(NABBIT_DIR) -I $(ARRAYS_DIR)
 
-CC=g++ -fcilkplus
+CC=gcc -fcilkplus
 CXX=g++ -fcilkplus
 CILKVIEW_FLAGS=
 LIBARG= -lpthread -lcilkrts

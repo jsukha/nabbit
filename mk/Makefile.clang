@@ -1,0 +1,13 @@
+# Makefile for compilation with clang branch of Cilk Plus
+
+# Include directory for Nabbit.
+NABBIT_INCLUDES = -I $(UTIL_DIR) -I $(NABBIT_DIR) -I $(ARRAYS_DIR)
+
+CC=clang
+CXX=clang++
+CILKVIEW_FLAGS=
+LIBARG= -lpthread
+
+CFLAGS = -Wall -O3 -fcilkplus
+CXXFLAGS = $(CFLAGS)
+CILK_SERIALIZE_FLAG = -cilk-serialize

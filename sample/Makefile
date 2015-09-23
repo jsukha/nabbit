@@ -16,7 +16,7 @@ check: $(TARGETS)
 	./example_static
 
 example_%: example_%.cpp $(H_FILES)
-	$(CC) $(CFLAGS) $< $(NABBIT_INCLUDES) $(LIBARG) -o $@
+	$(CXX) $(CFLAGS) $< $(NABBIT_INCLUDES) $(LIBARG) -o $@
 
 clean:
 	rm -f $(TARGETS) *.obj

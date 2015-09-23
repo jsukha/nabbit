@@ -14,7 +14,7 @@ TEST_FILES = $(addsuffix .cpp, $(TARGETS))
 all: $(TARGETS)
 
 test_%:  test_%.cpp $(H_FILES)
-	$(CC) $< $(INCLUDES) $(CFLAGS) -o $@
+	$(CXX) $< $(INCLUDES) $(CFLAGS) -o $@
 
 check: $(TARGETS)
 	./test_convert
