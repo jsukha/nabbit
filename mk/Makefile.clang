@@ -10,4 +10,7 @@ LIBARG= -lpthread
 
 CFLAGS = -Wall -O3 -fcilkplus
 CXXFLAGS = $(CFLAGS)
-CILK_SERIALIZE_FLAG = -cilk-serialize
+
+# TBD: Add in the appropriate flag.
+# when it is implemented.
+CILK_SERIALIZE_FLAG =

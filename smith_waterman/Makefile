@@ -75,13 +75,13 @@ swblockCons_%: $(MAIN_SRC) $(H_FILES) $(O_FILES)
 
 # ## Set the block size as a compile time flag.
 # swmovie_%: $(MAIN_SRC) $(H_FILES) $(O_FILES) $(IMAGE_O_FILES)
-# 	$(CC) $(CFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* -DTRACK_THREAD_CPU_IDS $(NABBIT_INCLUDES) $(O_FILES) $(IMAGE_O_FILES) $(LIBARG) -o $@
+# 	$(CXX) $(CFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* -DTRACK_THREAD_CPU_IDS $(NABBIT_INCLUDES) $(O_FILES) $(IMAGE_O_FILES) $(LIBARG) -o $@
 
 # sw_image.o: sw_image.cpp $(H_FILES)
-# 	$(CC) $(CFLAGS) $< -o $@
+# 	$(CXX) $(CFLAGS) $< -o $@
 
 # sw_visual.o: sw_visual.cpp $(H_FILES) 
-# 	$(CC) $(CFLAGS) -c sw_visual.cpp -DTRACK_THREAD_CPU_IDS $(NABBIT_INCLUDES) -o $@
+# 	$(CXX) $(CFLAGS) -c sw_visual.cpp -DTRACK_THREAD_CPU_IDS $(NABBIT_INCLUDES) -o $@
 
 clean:
 	rm -rf $(ALL_TARGETS) *.o  $(STAT_OUTPUTS) $(MOVIE_OUTPUTS)  *.obj *.exe

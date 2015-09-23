@@ -29,17 +29,17 @@ check: $(TARGETS)
 
 # Pattern rule for building tests cases.
 test_%: %_test.cpp $(UTIL_FILES) $(NABBIT_DIR)/%.h
-	$(CC) $< $(NABBIT_INCLUDES) $(CFLAGS) -o $@
+	$(CXX) $< $(NABBIT_INCLUDES) $(CFLAGS) -o $@
 
 malloc_test: malloc_test.cpp $(UTIL_FILES)
-	$(CC) $< $(NABBIT_INCLUDES) $(CFLAGS) -o $@
+	$(CXX) $< $(NABBIT_INCLUDES) $(CFLAGS) -o $@
 
 # Serial elision of test cases.
 ser_test_%: %_test.cpp $(UTIL_FILES) $(NABBIT_DIR)/%.h
-	$(CC) $< $(NABBIT_INCLUDES) $(CFLAGS) $(CILK_SERIALIZE_FLAG) -o $@
+	$(CXX) $< $(NABBIT_INCLUDES) $(CFLAGS) $(CILK_SERIALIZE_FLAG) -o $@
 
 ser_malloc_test: malloc_test.cpp $(UTIL_FILES)
-	$(CC) $< $(NABBIT_INCLUDES) $(CFLAGS) $(CILK_SERIALIZE_FLAG) -o $@
+	$(CXX) $< $(NABBIT_INCLUDES) $(CFLAGS) $(CILK_SERIALIZE_FLAG) -o $@
 
 clean:
 	rm -f $(TARGET) $(TARGETS) $(VALGRIND_TARGETS) *.exe *.obj
