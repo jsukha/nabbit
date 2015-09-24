@@ -287,7 +287,7 @@ bool BlockLayout::IsValidLayout() const {
   case COL_MAJOR_LAYOUT:
     {
       if (this->block_size < (this->sub_n * this->sub_m)) {
-	printf("this->block_size = %llu, expected = %llu\n",
+	printf("this->block_size = %ld, expected = %ld\n",
 	       this->block_size,
 	       this->sub_n * this->sub_m);
 	return false;
@@ -300,16 +300,16 @@ bool BlockLayout::IsValidLayout() const {
       test_size = hyperceil(NABBIT_MAX(this->sub_n,
 				       this->sub_m));
       if (test_size <= 0) {
-	printf("test_size here is %llu\n",
+	printf("test_size here is %ld\n",
 	       test_size);
 	return false;
       }
       // For the cache-oblivious layout, the
 
       if (this->block_size < (test_size * test_size)) {
-	printf("this->sub_n = %llu, this->sub_m = %llu\n",
+	printf("this->sub_n = %ld, this->sub_m = %ld\n",
 	       this->sub_n, this->sub_m);
-	printf("test_size2 here is %llu, this->block_size is %llu\n",
+	printf("test_size2 here is %ld, this->block_size is %ld\n",
 	       test_size,
 	       this->block_size);
 	return false;
@@ -526,7 +526,7 @@ ArrayLargeDim BlockLayout::Idx(ArrayDim i, ArrayDim j) const {
   if (0) {
     printf("this->inner_layout = %d, outer_layout = %d\n",
 	   this->inner_layout, this->outer_layout);
-    printf("(i = %d, j = %d): this->block_size is %llu. outer_idx = %llu, inner_idx = %llu, returning answer %llu\n",
+    printf("(i = %d, j = %d): this->block_size is %ld. outer_idx = %ld, inner_idx = %ld, returning answer %ld\n",
 	   i, j,
 	   this->block_size,
 	   outer_idx, inner_idx,

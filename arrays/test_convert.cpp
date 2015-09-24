@@ -191,7 +191,7 @@ void test_index_calc(int n, int m,
 	  
                     if ((verbose) || num_errors) {
                         printf("i = %d, j = %d\n", i, j);
-                        printf("idx = %llu\n", idx);
+                        printf("idx = %ld\n", idx);
                         printf("inner_layout = %d, outer_layout = %d\n",
                                layout.inner_layout, layout.outer_layout);
                         printf("(bi, bj) = (%d, %d)\n",

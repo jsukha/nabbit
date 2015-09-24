@@ -144,7 +144,7 @@ template <class T>
 void NabbitArray2DRowMajor<T>::print() {
   printf("2D Array %p (width = %d, height = %d, ",
 	 this, this->width, this->height);
-  printf("layout = %d, padding = %d, total_size = %llu)\n",
+  printf("layout = %d, padding = %d, total_size = %ld)\n",
 	 this->layout, this->padding, this->total_size);
 
   if (this->total_size < 1000) {
@@ -163,7 +163,7 @@ template <class T>
 void NabbitArray2DRowMajor<T>::print_layout() {
   printf("2D Array %p LAYOUT (width = %d, height = %d, ",
 	 this, this->width, this->height);
-  printf("layout = %d, padding = %d, total_size = %llu)\n",
+  printf("layout = %d, padding = %d, total_size = %ld)\n",
 	 this->layout, this->padding, this->total_size);
 
   if (this->total_size < 1000) {
@@ -280,7 +280,7 @@ bool NabbitArray2DRowMajor<T>::has_prev_col(ArrayLargeDim* idx) {
 }
 template <class T>
 void NabbitArray2DRowMajor<T>::prev_col(ArrayLargeDim* idx) {
-  *idx --;
+    (*idx)--;
 }
 
 template <class T>

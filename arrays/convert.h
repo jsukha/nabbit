@@ -458,7 +458,7 @@ double NabbitArrayReportDiffDouble(ArrayLargeDim n,
       if (diff * diff > threshhold) {
 	num_diffs++;
 	if (num_diffs < 10000) {
-	  printf("Diff = %f (%llu, %llu): Aout[%llu] = %f, Ain[%llu] = %f\n",
+	  printf("Diff = %f (%ld, %ld): Aout[%ld] = %f, Ain[%ld] = %f\n",
 		 diff,
 		 i, j,
 		 output_idx, output_A[output_idx],

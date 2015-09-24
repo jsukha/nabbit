@@ -249,7 +249,7 @@ template <class T, uint8_t PAD_LEVEL, int M_PADDING>
 void NabbitArray2DMorton<T, PAD_LEVEL, M_PADDING>::print() {
   printf("2D Array %p (width = %d, height = %d, ",
 	 this, this->width, this->height);
-  printf("layout = %d, padded_dim = %d, total_size = %llu)\n",
+  printf("layout = %d, padded_dim = %d, total_size = %ld)\n",
 	 this->layout, this->padded_dim, this->total_size);
 
   if (this->total_size < 1000) {
@@ -268,14 +268,14 @@ template <class T, uint8_t PAD_LEVEL, int M_PADDING>
 void NabbitArray2DMorton<T, PAD_LEVEL, M_PADDING>::print_layout() {
   printf("2D Array %p LAYOUT (width = %d, height = %d, ",
 	 this, this->width, this->height);
-  printf("layout = %d, padded_dim = %d, total_size = %llu)\n",
+  printf("layout = %d, padded_dim = %d, total_size = %ld)\n",
 	 this->layout, this->padded_dim, this->total_size);
   printf("PAD_LEVEL = %d, M_PADDING = %d\n",
 	 PAD_LEVEL, M_PADDING);
    
   if (this->total_size < 1000) {
     for (ArrayLargeDim i = 0; i < this->total_size; i++) {
-      printf("(%llu, %d) ", i, this->data[i]);
+      printf("(%ld, %d) ", i, this->data[i]);
     }
     printf("\n");
   }

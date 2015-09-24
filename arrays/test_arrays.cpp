@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
     }
 
     printf("Completed layout test\n");
+    printf("PASSED\n");
     
     return 0;
 }

@@ -40,7 +40,7 @@
 
 typedef int8_t ArrayLgDim;
 typedef int32_t ArrayDim;
-typedef uint64_t ArrayLargeDim;
+typedef int64_t ArrayLargeDim;
 
 
 // Hack to get unused parameter warnings to go away. 
