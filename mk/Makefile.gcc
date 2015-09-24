@@ -8,6 +8,6 @@ CXX=g++ -fcilkplus
 CILKVIEW_FLAGS=
 LIBARG= -lpthread -lcilkrts
 
-CFLAGS = -Wall -O3
-CXXFLAGS = $(CFLAGS)
+CFLAGS = -Wall -O3 -fcilkplus
+CXXFLAGS = $(CFLAGS) -std=c++0x
 CILK_SERIALIZE_FLAG = -include cilk/cilk_stub.h

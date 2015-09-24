@@ -56,32 +56,16 @@ all: $(ALL_TARGETS)
 
 # Build the main file.
 $(MAIN_TARGET): $(MAIN_SRC) $(H_FILES) $(O_FILES)
-	$(CXX) $(CFLAGS) $(MAIN_SRC) $(NABBIT_INCLUDES) $(O_FILES) $(LIBARG) -o $@
+	$(CXX) $(CXXFLAGS) $(MAIN_SRC) $(NABBIT_INCLUDES) $(O_FILES) $(LIBARG) -o $@
 
 # Build variants of block size. 
 swblock_%: $(MAIN_SRC) $(H_FILES) $(O_FILES)
-	$(CXX) $(CFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* $(NABBIT_INCLUDES) $(O_FILES) $(LIBARG) -o $@
+	$(CXX) $(CXXFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* $(NABBIT_INCLUDES) $(O_FILES) $(LIBARG) -o $@
 
 ## Set the block size as a compile time flag, and also have constant 
 ## computation for E and F.
 swblockCons_%: $(MAIN_SRC) $(H_FILES) $(O_FILES)
-	$(CXX) $(CFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* -DCOMPUTE_CONSTANT_EF $(NABBIT_INCLUDES) $(O_FILES) $(LIBARG) -o $@
-
-## TBD: The movie-generation code has bit-rotted for now.
-# It would be nice to add this back in at some later date.
-# MOVIE_O_FILES = 
-# MOVIE_TARGETS = swmovie_4 swmovie_16
-# MOVIE_OUTPUTS = runimg_*  runparam*.dat *.mpg
-
-# ## Set the block size as a compile time flag.
-# swmovie_%: $(MAIN_SRC) $(H_FILES) $(O_FILES) $(IMAGE_O_FILES)
-# 	$(CXX) $(CFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* -DTRACK_THREAD_CPU_IDS $(NABBIT_INCLUDES) $(O_FILES) $(IMAGE_O_FILES) $(LIBARG) -o $@
-
-# sw_image.o: sw_image.cpp $(H_FILES)
-# 	$(CXX) $(CFLAGS) $< -o $@
-
-# sw_visual.o: sw_visual.cpp $(H_FILES) 
-# 	$(CXX) $(CFLAGS) -c sw_visual.cpp -DTRACK_THREAD_CPU_IDS $(NABBIT_INCLUDES) -o $@
+	$(CXX) $(CXXFLAGS) $(MAIN_SRC) -DBLOCK_VALUE=$* -DCOMPUTE_CONSTANT_EF $(NABBIT_INCLUDES) $(O_FILES) $(LIBARG) -o $@
 
 clean:
 	rm -rf $(ALL_TARGETS) *.o  $(STAT_OUTPUTS) $(MOVIE_OUTPUTS)  *.obj *.exe
