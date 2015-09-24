@@ -38,7 +38,7 @@
 #include "nabbit_sysdep.h"
 
 // Debugging flag.
-//#define NABBIT_PRINT_DEBUG 1
+// #define STATIC_NABBIT_PRINT_DEBUG 1
 
 class StaticNabbitNode;
 typedef DynamicArray<StaticNabbitNode*> StaticNabbitNodeArray;
@@ -151,7 +151,7 @@ void StaticNabbitNode::source_compute(void) {
 
 void StaticNabbitNode::compute_and_notify() {
 
-#if NABBIT_PRINT_DEBUG == 1
+#if STATIC_NABBIT_PRINT_DEBUG == 1
   printf("COMPUTE AND NOTIFY called on key %lld, worker %d\n",
   	 this->key,
 	 NABBIT_WKR_ID);
@@ -177,7 +177,7 @@ void StaticNabbitNode::compute_and_notify() {
                                                    1);
 
     if (updated_val == 0) {
-#if NABBIT_PRINT_DEBUG == 1
+#if STATIC_NABBIT_PRINT_DEBUG == 1
       printf("Worker %d enabling current_pred with key = %llu.\n",
 	     NABBIT_WKR_ID,
 	     current_succ->key);

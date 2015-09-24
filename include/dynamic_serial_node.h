@@ -45,7 +45,7 @@
 
 #define PRINT_STATE_CHANGES 0
 
-#define NABBIT_PRINT_DEBUG 0
+#define DYNAMIC_SERIAL_NABBIT_PRINT_DEBUG 0
 
 class DynamicSerialNode;
 
@@ -235,7 +235,7 @@ void DynamicSerialNode::try_init_pred_and_compute(long long pred_key) {
   bool inserted = false;
   DynamicSerialNode* actualPredNode;
 
-#if NABBIT_PRINT_DEBUG == 1
+#if DYNAMIC_SERIAL_NABBIT_PRINT_DEBUG == 1
   printf("inside try_init_pred_and_compute: pred_key = %llu, this->key = %llu\n",
 	 pred_key, this->key);
 #endif
@@ -262,7 +262,7 @@ void DynamicSerialNode::try_init_pred_and_compute(long long pred_key) {
       pred_finished = false;
     }
 
-#if NABBIT_PRINT_DEBUG == 1
+#if DYNAMIC_SERIAL_NABBIT_PRINT_DEBUG == 1
     printf("inserted = %d. finished? %d\n", inserted, pred_finished);
 #endif
 	   
@@ -311,7 +311,7 @@ void DynamicSerialNode::init_node_and_compute() {
 
 void DynamicSerialNode::compute_and_notify() {
 
-#if NABBIT_PRINT_DEBUG == 1
+#if DYNAMIC_SERIAL_NABBIT_PRINT_DEBUG == 1
   printf("COMPUTE AND NOTIFY called on key %llu, worker %d\n",
   	 this->key,
          NABBIT_WKR_ID);
@@ -361,7 +361,7 @@ void DynamicSerialNode::compute_and_notify() {
 	// The parent node has been EXPANDED.  Now we should
 	// push the parent node onto our deque.
 
-#if NABBIT_PRINT_DEBUG == 1
+#if DYNAMIC_SERIAL_NABBIT_PRINT_DEBUG == 1
 	printf("Worker %d enabling current_succ with key = %llu.  Node's status is %d\n",
                NABBIT_WKR_ID, 
 	       current_succ->key,
