@@ -166,10 +166,11 @@ void StaticNabbitNode::compute_and_notify() {
 
     StaticNabbitNode* current_succ = this->successors->get(i);
     if (current_succ->join_counter <= 0) {
-      printf("ERROR: this key = %lld, current_succ = %p (key = %lld), join counter = %ld\n",
+      /*printf("ERROR: this key = %lld, current_succ = %p (key = %lld), join counter = %ld\n",
 	     this->key,
 	     current_succ, current_succ->key,
-	     current_succ->join_counter);
+	     current_succ->join_counter);*/
+        //printf("ERROR: negative join counter!\n"); // even this gives "function not inlinable..." in g++ 4.9.1
     }
     assert(current_succ->join_counter > 0);
     int updated_val = nabbit::atomic_sub_and_fetch(&(current_succ->join_counter),
