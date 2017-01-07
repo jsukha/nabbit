@@ -52,7 +52,7 @@ class DynamicSerialNode;
 typedef DynamicArray<long long> DTGSKeyArray;
 typedef DynamicArray<DynamicSerialNode*> DynamicSerialNodeArray;
 
-class DynamicSerialNode {
+class DynamicSerialNode : DynamicNode {
 
  public:
   long long key; 
@@ -62,7 +62,7 @@ class DynamicSerialNode {
   // Constructors for a node.
   DynamicSerialNode(long long k, TaskGraphHashTable* H);
   DynamicSerialNode(long long k, TaskGraphHashTable* H, int num_succ);
-  ~DynamicSerialNode();
+  virtual ~DynamicSerialNode();
 
   
   void add_dep(long long key);
@@ -72,7 +72,7 @@ class DynamicSerialNode {
 
   DAGNodeStatus get_status();
   inline bool try_mark_as_visited();
-  
+
  protected:
     
   virtual void Init() = 0;

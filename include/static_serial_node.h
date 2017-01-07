@@ -55,7 +55,7 @@ class StaticSerialNode {
   StaticSerialNode(long long k);
   StaticSerialNode(long long k, int num_predecessors);
 
-  ~StaticSerialNode();
+  virtual ~StaticSerialNode();
 
   // Methods to call when constructing a DAG statically.
   void init_node(int default_degree);

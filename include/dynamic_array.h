@@ -241,7 +241,7 @@ T DynamicArray<T>::get(int idx) {
     }
     return a[idx];
   } else {
-    return NULL;
+    return (long long int)NULL;
   }
 }
 

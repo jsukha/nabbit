@@ -52,7 +52,7 @@ typedef DynamicArray<long long> DTGSKeyArray;
 typedef DynamicArray<DynamicNabbitNode*> DynamicNabbitNodeArray;
 
 
-class DynamicNabbitNode {
+class DynamicNabbitNode : DynamicNode {
 
  public:
   long long key; 
@@ -62,7 +62,7 @@ class DynamicNabbitNode {
   // Constructors for a node.
   DynamicNabbitNode(long long k, TaskGraphHashTable* H);
   DynamicNabbitNode(long long k, TaskGraphHashTable* H, int num_succ);
-  ~DynamicNabbitNode();
+  virtual ~DynamicNabbitNode();
 
   
   void add_dep(long long key);
@@ -72,7 +72,7 @@ class DynamicNabbitNode {
 
   DAGNodeStatus get_status();
   inline bool try_mark_as_visited();
-  
+
  protected:
     
   virtual void Init() = 0;

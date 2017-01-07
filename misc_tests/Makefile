@@ -1,5 +1,6 @@
 include ../mk/Makefile
 
+CFLAGS += -I../util -I../include
 # The names of the tests to run.
 TEST_NAMES = dynamic_array concurrent_linked_list concurrent_hash_table
 OTHER_TESTS = malloc_test ser_malloc_test

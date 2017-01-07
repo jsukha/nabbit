@@ -43,4 +43,10 @@ typedef enum { NODE_UNVISITED=0,
                NODE_COMPLETED=4,
                NODE_DEAD=5 } DAGNodeStatus;
 
+class DynamicNode {
+    public:
+      virtual DAGNodeStatus get_status() =0;
+      virtual bool try_mark_as_visited() =0;
+};
+
 #endif // __DAG_STATUS_H_

@@ -56,7 +56,7 @@ class StaticNabbitNode {
   StaticNabbitNode(long long k);
   StaticNabbitNode(long long k, int num_predecessors);
 
-  ~StaticNabbitNode();
+  virtual ~StaticNabbitNode();
 
   // Methods to call when constructing a DAG statically.
   void init_node(int default_degree);
