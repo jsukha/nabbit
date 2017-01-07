@@ -13,5 +13,10 @@ UTIL_DIR=$(NABBIT_ROOT)/util
 ifeq ($(OS),Windows_NT)
 include $(NABBIT_ROOT)/mk/Makefile.icl
 else
+HAVE_ICC := $(shell command -v icc 2> /dev/null)
+ifdef HAVE_ICC
 include $(NABBIT_ROOT)/mk/Makefile.icc
+else
+include $(NABBIT_ROOT)/mk/Makefile.gcc
+endif
 endif

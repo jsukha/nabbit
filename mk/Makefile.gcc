@@ -1,0 +1,13 @@
+# Makefile for compilation with g++ (Linux)
+
+# Include directory for Nabbit.
+NABBIT_INCLUDES = -I $(UTIL_DIR) -I $(NABBIT_DIR) -I $(ARRAYS_DIR)
+
+CC=g++ -fcilkplus
+CXX=g++ -fcilkplus
+CILKVIEW_FLAGS=
+LIBARG= -lpthread -lcilkrts
+
+CFLAGS = -Wall -O3
+CXXFLAGS = $(CFLAGS)
+CILK_SERIALIZE_FLAG = -cilk-serialize
