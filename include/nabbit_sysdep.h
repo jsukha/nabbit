@@ -106,6 +106,7 @@ namespace nabbit {
 
 #else
     // GCC-compatible systems.
+#include <pthread.h>
 
     inline long atomic_add_and_fetch(long volatile* p, long x) {
         return __sync_add_and_fetch(p, x);
