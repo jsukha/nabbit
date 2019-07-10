@@ -2,16 +2,21 @@
 # Defines $(CC) and $(NABBIT_INCLUDES)
 include ../mk/Makefile
 
-TARGET = sample
+TARGETS = example_static
 SRC	= $(addsuffix .cpp,$(TARGET))
 
 
 H_FILES = sample_nabbit_node.h
 
-.PHONY: clean
+.PHONY: clean check
 
-$(TARGET): $(SRC) $(H_FILES) $(O_FILES)
-	$(CC) $(CFLAGS) $(SRC) $(NABBIT_INCLUDES) $(LIBARG) -o $@
+all: $(TARGETS)
+
+check: $(TARGETS)
+	./example_static
+
+example_%: example_%.cpp $(H_FILES)
+	$(CC) $(CFLAGS) $< $(NABBIT_INCLUDES) $(LIBARG) -o $@
 
 clean:
-	rm -f $(TARGET) *.obj
+	rm -f $(TARGETS) *.obj
