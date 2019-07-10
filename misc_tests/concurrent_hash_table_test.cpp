@@ -29,24 +29,22 @@ void all_hash_insert(ConcurrentHashTable* H, int R) {
     for (int i = 0; i < R; i++) {
         LOpStatus code = OP_FAILED;
         void* return_val;
-
+        void* i_as_ptr = reinterpret_cast<void*>(std::size_t(i));
         // Retry insert until return code is not OP_FAILED.
         while (code == OP_FAILED) {
             return_val = H->insert_if_absent(i,
-                                             (void*)i,
+                                             i_as_ptr, 
                                              &code);
             statusCounts[code]++;
         }
-        assert(return_val == (void*)i);
+        assert(return_val == i_as_ptr);
     }
 
-    //  L->print_list();
-    printf("Final code results: ");
+    std::cout << "Final code results: ";
     for (int i = OP_NULL; i < OP_LAST; i++) {
-        printf("(%d, %d)  ",
-               i, statusCounts[i]);
+        std::cout << "(" << i << ", " << statusCounts[i] << ")  ";
     }
-    printf("\n");
+    std::cout << "\n";
 }
 
 // Tries to insert n random elements into L, with each element being
@@ -60,35 +58,31 @@ void test_hash_insert(ConcurrentHashTable* H, int R, int n) {
     }
 
     if (print_output) {
-        printf("Test hash insert: R = %d, n = %d\n",
-               R, n);
+        std::cout << "Test hash insert: R = " << R << ", n = " << n << "\n";
     }
 
     for (int i = 0; i < n; i++) {
-
-
         int rand_num = rand() % R;
+        void* rand_as_ptr = reinterpret_cast<void*>(std::size_t(rand_num));
         LOpStatus code = OP_FAILED;
         void* return_val;
 
         while (code == OP_FAILED) {
             return_val = H->insert_if_absent(rand_num,
-                                             (void*)rand_num,
+                                             rand_as_ptr, 
                                              &code);
             statusCounts[code]++;
         }
-        assert(return_val == (void*)rand_num);
+        assert(return_val == rand_as_ptr);
     }
 
     if (print_output) {
-        printf("Code results: ");
+        std::cout << "Code results: ";
         for (int i = OP_NULL; i < OP_LAST; i++) {
-            printf("(%d, %d)  ",
-                   i, statusCounts[i]);
+            std::cout << "(" << i << ", " << statusCounts[i] << ")  ";
         }
-        printf("\n");
+        std::cout << "\n";
     }
-    //  L->print_list();
 }
 
 
@@ -101,10 +95,9 @@ int main(int argc, char *argv[])
         R = atoi(argv[1]);
     }
 
-
-    printf("Value of R: %d\n", R);     
+    std::cout << "Value of R: " << R << "\n";
     ConcurrentHashTable* H = new ConcurrentHashTable(5*R); // + ((R % 10) > 0));
-    printf("An empty hash table\n");
+    std::cout << "An empty hash table\n";
     H->print_table();
 
 
@@ -114,24 +107,28 @@ int main(int argc, char *argv[])
     }
     cilk_sync;
     long end_time = example_get_time();
-    printf("** Running time of %d hash insert attempts: %f seconds **\n ",
-           20 * (int)(R/20),
-           (end_time-start_time) / 1000.f);
+
+    int num_inserts = 20 * (int)(R/20);
+    double running_time = (end_time-start_time) / 1000.f;
+
+    std::cout << "** Running time of "
+              << num_inserts
+              << "hash insert attempts: "
+              << running_time << " seconds **\n ";
      
     all_hash_insert(H, R);
     check_hash_insert(H, R);
 
     if (R <= 100) {
-        printf("Final hash table\n");
+        std::cout << "Final hash table\n";
         H->print_table();
     }
 
-     
-    printf("Deleting hash table: \n");
+    std::cout << "Deleting hash table: \n";
     delete H;
-    printf("Done with delete\n");
-    printf("PASSED\n");
-    
+    std::cout << "Done with delete\n";
+    std::cout << "PASSED\n";
+
     return 0;
 }
 

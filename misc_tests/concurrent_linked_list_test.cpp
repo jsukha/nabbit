@@ -27,7 +27,8 @@ void repeated_malloc_free(unsigned int n, int p) {
         z += f[p];
         free(f);
     }
-    printf("z is %d\n", z);
+
+    std::cout << "z is " << z << "\n";
 }
 
 
@@ -48,33 +49,29 @@ bool check_list_insert(ConcurrentLinkedList* L, int R) {
 void all_list_insert(ConcurrentLinkedList* L, int R) {
 
     int statusCounts[OP_LAST];
-  
     for (int i = OP_NULL; i < OP_LAST; i++) {
         statusCounts[i] = 0;
     }
 
-    //  printf("Adding remainder\n");
     for (int i = 0; i < R; i++) {
         LOpStatus code = OP_FAILED;
         void* return_val;
-
+        void* i_as_ptr = reinterpret_cast<void*>(std::size_t(i));
         // Retry insert until return code is not OP_FAILED.
         while (code == OP_FAILED) {
             return_val = L->insert_if_absent(i,
-                                             (void*)i,
+                                             i_as_ptr, 
                                              &code);
             statusCounts[code]++;
         }
-        assert(return_val == (void*)i);
+        assert(return_val == i_as_ptr);
     }
 
-    //  L->print_list();
-    printf("Final code results: ");
+    std::cout << "Final code results: ";
     for (int i = OP_NULL; i < OP_LAST; i++) {
-        printf("(%d, %d)  ",
-               i, statusCounts[i]);
+        std::cout << "(" << i << ", " << statusCounts[i] << ")   ";
     }
-    printf("\n");
+    std::cout << "\n";
 }
 
 // Tries to insert n random elements into L, with each element being
@@ -85,33 +82,30 @@ void test_list_insert(ConcurrentLinkedList* L, int R, int n) {
     for (int i = OP_NULL; i < OP_LAST; i++) {
         statusCounts[i] = 0;
     }
-  
-    printf("Test list insert: R = %d, n = %d\n",
-           R, n);
+
+    std::cout << "Test list insert: R = " << R << ", n = " << n << "\n";
  
     for (int i = 0; i < n; i++) {
-
-
         int rand_num = rand() % R;
+        void* rand_as_ptr = reinterpret_cast<void*>(std::size_t(rand_num));
         LOpStatus code = OP_FAILED;
         void* return_val;
 
         while (code == OP_FAILED) {
             return_val = L->insert_if_absent(rand_num,
-                                             (void*)rand_num,
+                                             rand_as_ptr, 
                                              &code);
             statusCounts[code]++;
         }
-        assert(return_val == (void*)rand_num);
+        assert(return_val == rand_as_ptr);
     }
   
-    printf("Code results: ");
+
+    std::cout << "Code results: ";
     for (int i = OP_NULL; i < OP_LAST; i++) {
-        printf("(%d, %d)  ",
-               i, statusCounts[i]);
+        std::cout << "(" << i << ", " << statusCounts[i] << ")  ";
     }
-    printf("\n");
-    //  L->print_list();
+    std::cout << "\n";
 }
 
 
@@ -122,11 +116,10 @@ int main(int argc, char *argv[])
      if (argc >= 2) {
        R = atoi(argv[1]);
      }
-     printf("Value of R: %d\n", R);
-
+     std::cout << "Value of R: " << R << "\n";
 
      ConcurrentLinkedList* L = new ConcurrentLinkedList();
-     printf("An empty linked list\n");
+     std::cout << "An empty linked list\n";
      L->print_list();
 
      for (int i = 0; i < 20; i++) {
@@ -136,12 +129,13 @@ int main(int argc, char *argv[])
 
      all_list_insert(L, R);
      check_list_insert(L, R);
-     
-     printf("Deleting list: \n");
+
+
+     std::cout << "Deleting list: \n";
      delete L;
-     printf("Done with delete\n");
-     printf("PASSED\n");
-     
+
+     std::cout << "Done with delete\n";
+     std::cout << "PASSED\n";
      return 0;
 }
 

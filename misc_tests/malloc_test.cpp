@@ -51,9 +51,8 @@ int main(int argc, char *argv[])
         R = atoi(argv[1]);
     }
 
-  
-    printf("Value of R: %d\n", R);
-    printf("List length = %d\n", list_length);
+    std::cout << "Value of R: " << R << "\n";
+    std::cout << "List length = " << list_length << "\n";
 
     long start_time = example_get_time();
     for (int i = 0; i < 20; i++) {
@@ -61,12 +60,14 @@ int main(int argc, char *argv[])
     }
     cilk_sync;
     long end_time = example_get_time();
-    printf("** Running time of %d reps: attempts: %f seconds total, avg = %f **\n ",
-           R,
-           (end_time-start_time) / 1000.f,
-           (end_time-start_time) / (1000.f * R));
-	 
-  
+
+    double running_time = (end_time-start_time) / 1000.f;
+    double avg_time = (end_time-start_time) / (1000.f * R);
+
+    std::cout << "** Running time of "
+              << R  << "reps: "
+              << running_time << " seconds total, avg = "
+              << avg_time << "**\n";
     return 0;
 }
 

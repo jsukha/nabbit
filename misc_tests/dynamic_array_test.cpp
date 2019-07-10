@@ -50,15 +50,12 @@ void parallel_get(DynamicArray<int>* A, int n, int p) {
 }
 
 void parallel_search_get_test(int n, int p) {
-
-    int k = 0;
     bool done = false;
     DynamicArray<int>* A = new DynamicArray<int>(2);
     cilk_spawn serial_try_insert_n(A, n);
     do {
         parallel_get(A, n, p-1);
         done = (A->size_estimate() == n);
-        printf("Completed gets, iteration %d\n", k);
     } while (!done);
     cilk_sync;
     delete A;

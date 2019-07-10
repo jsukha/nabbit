@@ -111,6 +111,8 @@ class DynamicArray {
 
   
  public:
+
+  const static T NullValue = T(-1);
   
   DynamicArray(int init_capacity);
   ~DynamicArray();
@@ -241,7 +243,7 @@ T DynamicArray<T>::get(int idx) {
     }
     return a[idx];
   } else {
-    return NULL;
+    return NullValue;
   }
 }
 
@@ -267,7 +269,7 @@ T DynamicArray<T>::get_with_print(int idx) {
 	   a[idx]);
     return a[idx];
   } else {
-    return NULL;
+    return NullValue;
   }
 }
 

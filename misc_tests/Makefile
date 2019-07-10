@@ -13,11 +13,18 @@ TARGETS = $(TEST_TARGETS)  $(OTHER_TESTS)
 
 VALGRIND_TARGETS =  $(addprefix ser_test_, $(TEST_NAMES))
 
-.PHONY: all clean
+.PHONY: all clean check
 
 default: $(TARGETS)
 
 all: $(TARGETS) $(VALGRIND_TARGETS)
+
+check: $(TARGETS)
+	./test_dynamic_array
+	./test_concurrent_linked_list
+	./test_concurrent_hash_table
+	./ser_malloc_test
+	./malloc_test
 
 
 # Pattern rule for building tests cases.
