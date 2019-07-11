@@ -485,14 +485,6 @@ ArrayLargeDim BlockLayout::Idx(ArrayDim i, ArrayDim j) const {
   si = i % this->sub_n;
   sj = j % this->sub_m;
   
-
-/*   printf("HERE: i = %d, j = %d, this->outer_layout = %d, this->inner_layout = %d\n", */
-/*   	 i, j, */
-/*   	 this->outer_layout, */
-/*   	 this->inner_layout); */
-//  printf("HERE: Bi = %d, Bj = %d\n", Bi, Bj);
-  
- 
   switch (this->outer_layout) {
   case ROW_MAJOR_LAYOUT:
     {
@@ -505,33 +497,21 @@ ArrayLargeDim BlockLayout::Idx(ArrayDim i, ArrayDim j) const {
     {
       ArrayLargeDim Bn = block_count(this->n, this->sub_n);
       outer_idx = NabbitLayoutIndexing<COL_MAJOR_LAYOUT>::get_idx(Bi, Bj, Bn);
-      // ArrayLargeDim Bn = block_count(layout->n, layout->sub_n);
-      // outer_idx = Bi + Bn*Bj;
     }
     break;    
   case MORTON_LAYOUT:
     {
       outer_idx = NabbitLayoutIndexing<MORTON_LAYOUT>::get_idx(Bi, Bj, 0);
-      //    outer_idx = MortonIndexing::MORTON_IDX(Bi, Bj);
     }
     break;
   default:
+    outer_idx = 0;
     assert(0);
   }
 
   inner_idx = this->InnerIdx(si, sj);
 
   assert(inner_idx < this->block_size);
-
-  if (0) {
-    printf("this->inner_layout = %d, outer_layout = %d\n",
-	   this->inner_layout, this->outer_layout);
-    printf("(i = %d, j = %d): this->block_size is %ld. outer_idx = %ld, inner_idx = %ld, returning answer %ld\n",
-	   i, j,
-	   this->block_size,
-	   outer_idx, inner_idx,
-	   this->block_size * outer_idx + inner_idx);
-  }
 
   return this->block_size * outer_idx  + inner_idx;
 }
