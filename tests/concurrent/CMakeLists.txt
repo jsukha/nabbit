@@ -1,0 +1,6 @@
+setup_unit_test(concurrent dynamic_array_test)
+setup_unit_test(concurrent concurrent_linked_list_test)
+setup_unit_test(concurrent concurrent_hash_table_test)
+setup_unit_test(concurrent malloc_test)
+
+setup_serialized_unit_test(concurrent malloc_test)
