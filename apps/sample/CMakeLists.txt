@@ -1,0 +1,5 @@
+add_executable(sample_static static.cpp)
+target_include_directories(sample_static PRIVATE ${PROJECT_SOURCE_DIR}/util)
+target_link_libraries(sample_static PRIVATE Nabbit cilkrts pthread)
+target_compile_options(sample_static PRIVATE ${CMAKE_CILK_FLAGS})
+add_test(sample_static sample_static)
