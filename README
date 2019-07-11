@@ -119,8 +119,8 @@ Version History
 1.12 Minor tweaks to build with Clang/LLVM branch of Cilk Plus.
 
     - Creating a "dev" branch for active development.
-    - Extending Makefile to look for icc, then clang, then gcc.
+    - Extending Makefile to look for icc, then gcc, then clang.
     - Adding flags to use C++11 for compilation.
     - Other minor edits to eliminate compiler warnings with clang++.
-
+    - Minor edits to eliminate compiler warnings with GCC 5.4
       
