@@ -36,8 +36,8 @@
 #include <cilk/cilk.h>
 
 
-#include "array2d_row.h"
-#include "array2d_morton.h"
+#include <arrays/array2d_row.h>
+#include <arrays/array2d_morton.h>
 
 
 template <class MatrixType>

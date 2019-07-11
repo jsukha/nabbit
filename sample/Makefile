@@ -1,6 +1,5 @@
-
-# Defines $(CC) and $(NABBIT_INCLUDES)
-include ../mk/Makefile
+NABBIT_ROOT=..
+include ${NABBIT_ROOT}/mk/Makefile
 
 TARGETS = example_static
 SRC	= $(addsuffix .cpp,$(TARGET))

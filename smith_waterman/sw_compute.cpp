@@ -41,8 +41,8 @@
 #include <cilk/cilk.h>
 
 #include <example_util_gettime.h>
-#include <array2d_row.h>
-#include <array2d_morton.h>
+#include <arrays/array2d_row.h>
+#include <arrays/array2d_morton.h>
 #include "matrix_utils.h"
 #include "sw_computeEF.h"
 #include "sw_matrix_kernels.h"

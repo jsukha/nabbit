@@ -35,7 +35,7 @@
 #include <cilk/cilk.h>
 
 
-#include "convert.h"
+#include <arrays/convert.h>
 
 
 void test_blocksizes(void) {

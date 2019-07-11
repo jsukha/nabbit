@@ -39,8 +39,8 @@
 #ifndef __SW_DAG_PARAMS_H
 #define __SW_DAG_PARAMS_H
 
-#include <array2d_base.h>
-#include <array2d_morton.h>
+#include <arrays/array2d_base.h>
+#include <arrays/array2d_morton.h>
 #include "sw_matrix_kernels.h"
 
 #define RANDOM_CHILD_ORDER 0

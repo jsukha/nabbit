@@ -1,5 +1,3 @@
-NABBIT_ROOT=..
-
 # The directory where Nabbit's .h files are located.
 NABBIT_DIR=$(NABBIT_ROOT)/include
 

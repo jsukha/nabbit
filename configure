@@ -1,0 +1,4 @@
+# Configure
+rm -rf build; 
+mkdir build
+cmake -H. -Bbuild

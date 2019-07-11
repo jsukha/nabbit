@@ -27,7 +27,9 @@
 #  POSSIBILITY OF SUCH DAMAGE.
 #  
 
-include ../mk/Makefile
+NABBIT_ROOT=..
+
+include ${NABBIT_ROOT}/mk/Makefile
 
 MAIN_TARGET=sw_compute
 

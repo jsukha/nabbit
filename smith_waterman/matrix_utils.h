@@ -38,8 +38,8 @@
 #ifndef __MATRIX_UTILS_H
 #define __MATRIX_UTILS_H
 
-#include <array2d_row.h>
-#include <array2d_morton.h>
+#include <arrays/array2d_row.h>
+#include <arrays/array2d_morton.h>
 
 
 #define MAX(m, n) ((m) > (n) ? (m) : (n))

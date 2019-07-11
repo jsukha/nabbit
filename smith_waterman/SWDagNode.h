@@ -40,8 +40,8 @@
 #define __SW_DAG_NODE_H
 
 #include <nabbit.h>
-#include <array2d_base.h>
-#include <array2d_morton.h>
+#include <arrays/array2d_base.h>
+#include <arrays/array2d_morton.h>
 
 #include "sw_matrix_kernels.h"
 #include "SWDagParams.h"

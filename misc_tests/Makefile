@@ -1,4 +1,5 @@
-include ../mk/Makefile
+NABBIT_ROOT=..
+include ${NABBIT_ROOT}/mk/Makefile
 
 # The names of the tests to run.
 TEST_NAMES = dynamic_array concurrent_linked_list concurrent_hash_table

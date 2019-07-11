@@ -1,0 +1,60 @@
+NABBIT_ROOT=..
+
+# The directory where Nabbit's .h files are located.
+NABBIT_DIR=$(NABBIT_ROOT)/include
+
+# Directory for array indexing routines.
+ARRAYS_DIR=$(NABBIT_ROOT)/arrays
+
+# The directory for other common utilities
+UTIL_DIR=$(NABBIT_ROOT)/util
+
+# Choose a platform-dependent Makefile
+ifeq ($(OS),Windows_NT)
+    # For now, not much to do on Windows; only one Cilk Plus compiler we are testing.
+    include $(NABBIT_ROOT)/mk/Makefile.icl
+else
+    # If the COMPILER variable isn't set explicitly,
+    # we are going to do some Makefile magic to find
+    # a compiler. 
+    ifeq ($(COMPILER),)
+        # The compilers we will use, in preference order.
+        # NOTE: We aren't checking version numbers
+        # of compilers here, so something could still go wrong,
+        # since, not all versions will support Cilk Plus.
+        # But we can try to fix that later...
+        ICC_PATH := $(strip $(shell which icc))
+        CLANG_PATH := $(strip $(shell which clang))
+        GCC_PATH := $(strip $(shell which gcc))
+
+        ifneq ($(ICC_PATH),)
+            COMPILER := icc
+        else
+            ifneq ($(GCC_PATH),)
+                COMPILER := gcc
+            else
+                ifneq ($(CLANG_PATH),)
+                    COMPILER := clang
+                else
+                    $(error "No compiler potentially supporting Cilk Plus was found")
+                endif
+            endif
+        endif
+        $(info Detecting COMPILER=$(COMPILER))
+    else
+       $(info User-specified compiler $(COMPILER))
+    endif
+
+    # Forward to the right Makefile, depending on
+    # what is specified or what we detect.
+    ifeq ($(COMPILER),icc)
+        include $(NABBIT_ROOT)/mk/Makefile.icc
+    endif
+    ifeq ($(COMPILER),clang)
+        include $(NABBIT_ROOT)/mk/Makefile.clang
+    endif
+    ifeq ($(COMPILER),gcc)
+        include $(NABBIT_ROOT)/mk/Makefile.gcc
+    endif
+endif
+
