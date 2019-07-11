@@ -289,7 +289,7 @@ ArrayLargeDim NabbitArray2DMorton<T, PAD_LEVEL, M_PADDING>::ArrayMortonIndex(Arr
 template <class T, uint8_t PAD_LEVEL, int M_PADDING>
 ArrayLargeDim NabbitArray2DMorton<T, PAD_LEVEL, M_PADDING>::MortonSize(ArrayDim n) {
   ArrayLargeDim test_size = 1;
-  while (test_size < (size_t)n) {
+  while (test_size < (ArrayLargeDim)n) {
     test_size <<=1;
   }
 

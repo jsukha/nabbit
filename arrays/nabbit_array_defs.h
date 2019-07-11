@@ -79,12 +79,12 @@ static inline ArrayLargeDim hyperceil(ArrayLargeDim n) {
 // Returns the largest power of 2 which is <= n.
 static inline ArrayLargeDim hyperfloor(ArrayLargeDim n) {
   int pos = 0;
-  if (n >= 1ULL<<32) { n >>= 32; pos += 32; }
-  if (n >= 1ULL<<16) { n >>= 16; pos += 16; }
-  if (n >= 1ULL<< 8) { n >>=  8; pos +=  8; }
-  if (n >= 1ULL<< 4) { n >>=  4; pos +=  4; }
-  if (n >= 1ULL<< 2) { n >>=  2; pos +=  2; }
-  if (n >= 1ULL<< 1) {           pos +=  1; }
+  if (n >= 1LL<<32) { n >>= 32; pos += 32; }
+  if (n >= 1LL<<16) { n >>= 16; pos += 16; }
+  if (n >= 1LL<< 8) { n >>=  8; pos +=  8; }
+  if (n >= 1LL<< 4) { n >>=  4; pos +=  4; }
+  if (n >= 1LL<< 2) { n >>=  2; pos +=  2; }
+  if (n >= 1LL<< 1) {           pos +=  1; }
   return ((n == 0) ? 0 : (1 << pos));
 }
 
