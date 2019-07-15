@@ -32,9 +32,9 @@
 # sizes, block sizes, and test types.
 #
 
-maxP=12
+maxP=8
 maxTestType=5
-numReps=5
+numReps=3
 
 # NOTE: The default Cilk Plus runtim has a spawn depth limit of
 # roughly 1024.  So executing with smaller block sizes may start
@@ -48,7 +48,7 @@ echo "-----------------------N=$N-----------------------------"
     echo "***********N = $N, B=$B ********************"
     for test_type in 1 2 3 4
     do
-      for ((P=1;P<=$maxP ;P+=1)) do
+      for ((P=1;P<=$maxP ;P*=2)) do
         for ((k=0; k<=$numReps; k+=1)) do
           estring="CILK_NWORKERS=$P ./swblock_$B $N $M $test_type 0"
           eval $estring
