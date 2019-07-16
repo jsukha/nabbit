@@ -1,4 +1,4 @@
-Nabbit, Version 1.12
+Nabbit
 
 ----------------------------------------------------------------------
 This folder contains the implementation of Nabbit, a Cilk library for
@@ -10,11 +10,16 @@ are no binaries to link with.
 
 The code is organized into the following folders:
 
-include: The header files which make up the library.  Of these files,
-  including nabbit.h should include all the other files.
+`include`: The header files which make up the library.  Of these files,
+  including `nabbit.h` should include all the other files.
 
-sample: A simple test program which demonstrates how to use the
-        library.
+
+`include/arrays`: Defines row-major and Morton-order 2-d arrays.  These arrays
+                  are used only for the code in the `smith_waterman` directory.
+
+`tests/arrays`: Some tests for the code from `include/arrays`.
+
+`apps/sample`: A simple test program which demonstrates how to use the library.
 
         1.  Define a new DAG node class, which extends from one of the
         classes defined in nabbit_node.h
@@ -40,22 +45,24 @@ sample: A simple test program which demonstrates how to use the
 	ok for the simple benchmarks we have.
 
 	
-smith_waterman: A benchmark which performs a dynamic program
-                calculation with a similar recurrence as the dynamic
-                program for the Smith Waterman algorithm.
+`apps/smith_waterman`: A benchmark which performs a dynamic program
+                       calculation with a similar recurrence as the dynamic
+                       program for the Smith Waterman algorithm.
 
-arrays: Defines row-major and Morton-order 2-d arrays.  These arrays
-        are used only for the code in the smith_waterman directory.
+`tests/concurrent`: Some tests for the data structures defined for the library
+                    (linked list, dynamic array, and hash table).
 
-misc_tests: Some tests for the data structures defined for the library
-            (linked list, dynamic array, and hash table).
+
+`toolchains`: CMake toolchain files for different configurations
+
+`util`: Miscellaneous utilities used by `apps`.
+
 
 
 
 The interface to the library is still changing.  Hopefully, we can
 improve the interface (and possibly functionality) as we test more
 applications.
-
 
 
 For more documentation, please see the following paper in IPDPS 2010:
@@ -70,6 +77,7 @@ April 19--23, 2010
 
 BibTex Entry:
 
+```
 @InProceedings{AgrawalLeSu10b,
  author       = {Kunal Agrawal and Charles E. Leiserson and Jim Sukha},
  title	      = {Executing Task Graphs Using Work-Stealing},
@@ -79,8 +87,7 @@ BibTex Entry:
  day          = {19--23},
  year	      = 2010,
 }
-
-
+```
 
 
 Please feel free to send comments / suggestions to the authors.
@@ -88,7 +95,6 @@ Please feel free to send comments / suggestions to the authors.
 Contact info:
 
 Jim Sukha
-sukhaj@gmail.com
 
 
 ---------------------------------------------
@@ -124,3 +130,5 @@ Version History
     - Other minor edits to eliminate compiler warnings with clang++.
     - Minor edits to eliminate compiler warnings with GCC 5.4
       
+1.2 Change build to use CMake
+    
