@@ -1,4 +1,16 @@
 # Configure
-rm -rf build; 
-mkdir build
-cmake -H. -Bbuild
+if [ -z $1 ]; then
+    TOOLCHAIN=gcc
+else
+    TOOLCHAIN=$1
+fi
+
+if [ -z $2 ]; then
+    BUILD_DIR=build_${TOOLCHAIN}
+else
+    BUILD_DIR=$2
+fi
+
+rm -rf ${BUILD_DIR}; 
+mkdir ${BUILD_DIR}
+cmake -DCMAKE_TOOLCHAIN_FILE=toolchains/${TOOLCHAIN}.cmake -H. -B${BUILD_DIR}
